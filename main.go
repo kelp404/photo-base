@@ -11,9 +11,12 @@ func main() {
 	router.StaticFile("/app.js", "./frontend/app.js")
 	router.LoadHTMLFiles("./frontend/templates/base.html")
 
-	router.GET("/", func(content *gin.Context) {
-		content.HTML(http.StatusOK, "base.html", gin.H{})
-	})
+	router.GET("/", baseHandler)
+	router.GET("/uploader", baseHandler)
 
 	router.Run(":8080")
+}
+
+func baseHandler(content *gin.Context) {
+	content.HTML(http.StatusOK, "base.html", gin.H{})
 }
