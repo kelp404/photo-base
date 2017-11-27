@@ -1,0 +1,21 @@
+{
+  "name": "photo-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gin -a 8080 run main.go",
+    "start": "go run main.go",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelp404/photo-base.git"
+  },
+  "author": "",
+  "Private": true,
+  "bugs": {
+    "url": "https://github.com/kelp404/photo-base/issues"
+  },
+  "homepage": "https://github.com/kelp404/photo-base#readme"
+}
