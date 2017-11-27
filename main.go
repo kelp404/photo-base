@@ -7,6 +7,7 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.Static("/node_modules", "./node_modules")
 	router.LoadHTMLFiles("./templates/base.html")
 
 	router.GET("/", func(content *gin.Context) {

@@ -1,5 +1,9 @@
 # gin
-gin-bin
+/gin-bin
 
 # Editor
-.idea
+/.idea
+
+# npm
+/node_modules
+/package-lock.json
