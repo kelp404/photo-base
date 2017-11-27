@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/kelp404/photo-base#readme",
   "dependencies": {
-    "bootstrap": "3.3.7"
+    "bootstrap": "3.3.7",
+    "vue": "2.5.8",
+    "vue-router": "3.0.1"
   }
 }
