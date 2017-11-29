@@ -5,7 +5,22 @@
       {
         path: '/',
         component: {
-          template: '<div>foo</div>'
+          data: function () {
+            return {
+              photos: []
+            };
+          },
+          template: '<div>{{ photos }}</div>',
+          created: function () {
+            this.fetchData();
+          },
+          methods: {
+            fetchData: function () {
+              this.$http.get('/api/photos').then(function (response) {
+                this.photos = response.body;
+              });
+            }
+          }
         }
       },
       {
