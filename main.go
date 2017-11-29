@@ -17,6 +17,7 @@ func main() {
 
 	// API
 	router.GET("/api/photos", getPhotos)
+	router.POST("/api/photos", uploadPhoto)
 
 	router.Run(":8080")
 }
@@ -27,4 +28,10 @@ func baseHandler(content *gin.Context) {
 
 func getPhotos(content *gin.Context) {
 	content.JSON(http.StatusOK, []string{"lena", "austin", "foo"})
+}
+
+func uploadPhoto(content *gin.Context) {
+	content.JSON(http.StatusOK, gin.H{
+		"src": "http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png",
+	})
 }
