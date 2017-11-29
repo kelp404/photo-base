@@ -9,6 +9,7 @@ func main() {
 	router := gin.Default()
 	router.Static("/node_modules", "./node_modules")
 	router.StaticFile("/app.js", "./frontend/app.js")
+	router.StaticFile("/templates/uploader.html", "./frontend/templates/uploader.html")
 	router.LoadHTMLFiles("./frontend/templates/base.html")
 
 	router.GET("/", baseHandler)

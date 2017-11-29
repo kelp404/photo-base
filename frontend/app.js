@@ -16,7 +16,7 @@
           },
           methods: {
             fetchData: function () {
-              this.$http.get('/api/photos').then(function (response) {
+              Vue.http.get('/api/photos').then(function (response) {
                 this.photos = response.body;
               });
             }
@@ -25,8 +25,12 @@
       },
       {
         path: '/uploader',
-        component: {
-          template: '<div>uploader</div>'
+        component: function (resolve) {
+          Vue.http.get('/templates/uploader.html').then(function (response) {
+            resolve({
+              template: response.body
+            });
+          });
         }
       }
     ]
