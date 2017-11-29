@@ -8,9 +8,27 @@
 </head>
 <body>
   <div id="root">
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                  data-target="#navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <router-link class="navbar-brand" to="/">Home</router-link>
+        </div>
 
-    <h2>{{`{{ message }}`}}</h2>
-    <router-link to="/uploader">Upload</router-link>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><router-link to="/uploader">Upload</router-link></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <router-view></router-view>
   </div>
   <script type="text/javascript" src="/app.js"></script>
