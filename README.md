@@ -20,8 +20,8 @@ $ go get github.com/nfnt/resize
 $ npm install
 ```
 
-**Run develop server**
+**Run server**
 ```bash
-$ npm run dev
-# go to browser type localhost:3000
+$ npm start
+# go to browser type localhost:8080
 ```
