@@ -1,4 +1,5 @@
 (function () {
+  Vue.use(Croppa);
   var router = new VueRouter({
     mode: 'history',
     routes: [
@@ -28,7 +29,26 @@
         component: function (resolve) {
           Vue.http.get('/templates/uploader.html').then(function (response) {
             resolve({
-              template: response.body
+              template: response.body,
+              data: function () {
+                return {
+                  croppa: {}
+                };
+              },
+              methods: {
+                uploadCroppedImage: function () {
+                  this.croppa.generateBlob(function (blob) {
+                    console.log('x');
+                    var form = new FormData();
+                    form.append('file', blob);
+                    Vue.http.post('/api/photos', form, {
+                      headers: {
+                        'Content-Type': 'multipart/form-data'
+                      }
+                    });
+                  }, 'image/jpeg', 0.8);
+                }
+              }
             });
           });
         }
