@@ -18,8 +18,12 @@ func main() {
 	router.StaticFile("/templates/uploader.html", "./frontend/templates/uploader.html")
 	router.LoadHTMLFiles("./frontend/templates/base.html")
 
+	// base template
 	router.GET("/", baseHandler)
 	router.GET("/uploader", baseHandler)
+
+	// /photos
+	router.Static("/photos", "./files/photos")
 
 	// API
 	router.GET("/api/photos", getPhotos)
