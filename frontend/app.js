@@ -38,7 +38,6 @@
               methods: {
                 uploadCroppedImage: function () {
                   this.croppa.generateBlob(function (blob) {
-                    console.log('x');
                     var form = new FormData();
                     form.append('file', blob);
                     Vue.http.post('/api/photos', form, {
