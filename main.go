@@ -28,18 +28,18 @@ func main() {
 	router.Run(":8080")
 }
 
-func baseHandler(content *gin.Context) {
-	content.HTML(http.StatusOK, "base.html", gin.H{})
+func baseHandler(context *gin.Context) {
+	context.HTML(http.StatusOK, "base.html", gin.H{})
 }
 
-func getPhotos(content *gin.Context) {
-	content.JSON(http.StatusOK, []string{"lena", "austin", "foo"})
+func getPhotos(context *gin.Context) {
+	context.JSON(http.StatusOK, []string{"lena", "austin", "foo"})
 }
 
-func uploadPhoto(content *gin.Context) {
-	file, _, err := content.Request.FormFile("file")
+func uploadPhoto(context *gin.Context) {
+	file, _, err := context.Request.FormFile("file")
 	if err != nil {
-		content.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
+		context.String(http.StatusBadRequest, fmt.Sprintf("get form err: %s", err.Error()))
 		return
 	}
 	filename := fmt.Sprintf("%s", uuid.NewV4())
@@ -59,7 +59,7 @@ func uploadPhoto(content *gin.Context) {
 	jpeg.Encode(middleOutput, middle, nil)
 	jpeg.Encode(largeOutput, large, nil)
 
-	content.JSON(http.StatusOK, gin.H{
+	context.JSON(http.StatusOK, gin.H{
 		"small": "/photos/"+filename+"-s.jpg",
 		"middle": "/photos/"+filename+"-m.jpg",
 		"large": "/photos/"+filename+"-l.jpg",
