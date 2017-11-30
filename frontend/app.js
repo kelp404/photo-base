@@ -33,10 +33,18 @@
               data: function () {
                 return {
                   croppa: {},
+                  initialImage: null,
                   result: null
                 };
               },
               methods: {
+                loadImage: function () {
+                  var image = new Image();
+                  image.setAttribute('crossorigin', 'anonymous');
+                  image.src = 'http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png';
+                  this.initialImage = image;
+                  console.log(this.croppa);
+                },
                 uploadCroppedImage: function () {
                   var _this = this;
                   this.croppa.generateBlob(function (blob) {

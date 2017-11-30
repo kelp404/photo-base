@@ -3,6 +3,7 @@
     <div class="col-sm-12">
       <h4>Upload a photo</h4>
       <croppa v-model="croppa"
+              :initial-image="'http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png'"
               :width="400"
               :height="400"
               :canvas-color="'default'"
@@ -14,6 +15,7 @@
               :quality="2"
               :zoom-speed="3"></croppa>
       <div>
+        <button @click="loadImage" class="btn btn-default">Load</button>
         <p v-if="result">
           Small: <a :href="result.small" target="_blank">{{ result.small }}</a><br/>
           Middle: <a :href="result.middle" target="_blank">{{ result.middle }}</a><br/>
