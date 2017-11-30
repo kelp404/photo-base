@@ -14,6 +14,11 @@
               :quality="2"
               :zoom-speed="3"></croppa>
       <div>
+        <p v-if="result">
+          Small: <a :href="result.small" target="_blank">{{ result.small }}</a>
+          Middle: <a :href="result.middle" target="_blank">{{ result.middle }}</a>
+          Large: <a :href="result.large" target="_blank">{{ result.large }}</a>
+        </p>
         <button @click="uploadCroppedImage" class="btn btn-primary">Submit</button>
       </div>
     </div>

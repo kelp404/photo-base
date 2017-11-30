@@ -32,11 +32,13 @@
               template: response.body,
               data: function () {
                 return {
-                  croppa: {}
+                  croppa: {},
+                  result: null
                 };
               },
               methods: {
                 uploadCroppedImage: function () {
+                  var _this = this;
                   this.croppa.generateBlob(function (blob) {
                     var form = new FormData();
                     form.append('file', blob);
@@ -44,6 +46,8 @@
                       headers: {
                         'Content-Type': 'multipart/form-data'
                       }
+                    }).then(function (response) {
+                      _this.result = response.body;
                     });
                   }, 'image/jpeg', 0.8);
                 }

@@ -60,8 +60,8 @@ func uploadPhoto(content *gin.Context) {
 	jpeg.Encode(largeOutput, large, nil)
 
 	content.JSON(http.StatusOK, gin.H{
-		"small": filename+"-s.jpg",
-		"middle": filename+"-m.jpg",
-		"large": filename+"-l.jpg",
+		"small": "/photos/"+filename+"-s.jpg",
+		"middle": "/photos/"+filename+"-m.jpg",
+		"large": "/photos/"+filename+"-l.jpg",
 	})
 }
