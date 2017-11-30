@@ -26,7 +26,6 @@ func main() {
 	router.Static("/photos", "./files/photos")
 
 	// API
-	router.GET("/api/photos", getPhotos)
 	router.POST("/api/photos", uploadPhoto)
 
 	router.Run(":8080")
@@ -34,10 +33,6 @@ func main() {
 
 func baseHandler(context *gin.Context) {
 	context.HTML(http.StatusOK, "base.html", gin.H{})
-}
-
-func getPhotos(context *gin.Context) {
-	context.JSON(http.StatusOK, []string{"lena", "austin", "foo"})
 }
 
 func uploadPhoto(context *gin.Context) {

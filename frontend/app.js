@@ -5,24 +5,7 @@
     routes: [
       {
         path: '/',
-        component: {
-          data: function () {
-            return {
-              photos: []
-            };
-          },
-          template: '<div>{{ photos }}</div>',
-          created: function () {
-            this.fetchData();
-          },
-          methods: {
-            fetchData: function () {
-              Vue.http.get('/api/photos').then(function (response) {
-                this.photos = response.body;
-              });
-            }
-          }
-        }
+        redirect: '/uploader'
       },
       {
         path: '/uploader',
