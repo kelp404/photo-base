@@ -3,10 +3,12 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
+	"github.com/nfnt/resize"
 	"net/http"
 	"fmt"
 	"os"
-	"io"
+	"image"
+	"image/jpeg"
 )
 
 func main() {
@@ -41,13 +43,25 @@ func uploadPhoto(content *gin.Context) {
 		return
 	}
 	filename := fmt.Sprintf("%s", uuid.NewV4())
-	out, err := os.Create("./files/photos/"+filename)
-	if err != nil {
-		content.String(http.StatusInternalServerError, fmt.Sprintf("get form err: %s", err.Error()))
-		return
-	}
-	defer out.Close()
-	io.Copy(out, file)
+	img, _, err := image.Decode(file)
+	small := resize.Resize(200, 0, img, resize.Lanczos3)
+	middle := resize.Resize(800, 0, img, resize.Lanczos3)
+	large := resize.Resize(1200, 0, img, resize.Lanczos3)
 
-	content.JSON(http.StatusOK, []string{"lena", "austin", "foo"})
+	// write files
+	smallOutput, _ := os.Create("./files/photos/"+filename+"-s.jpg")
+	middleOutput, _ := os.Create("./files/photos/"+filename+"-m.jpg")
+	largeOutput, _ := os.Create("./files/photos/"+filename+"-l.jpg")
+	defer smallOutput.Close()
+	defer middleOutput.Close()
+	defer largeOutput.Close()
+	jpeg.Encode(smallOutput, small, nil)
+	jpeg.Encode(middleOutput, middle, nil)
+	jpeg.Encode(largeOutput, large, nil)
+
+	content.JSON(http.StatusOK, gin.H{
+		"small": filename+"-s.jpg",
+		"middle": filename+"-m.jpg",
+		"large": filename+"-l.jpg",
+	})
 }
