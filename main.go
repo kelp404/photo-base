@@ -53,9 +53,9 @@ func uploadPhoto(context *gin.Context) {
 	large := resize.Resize(1200, 0, img, resize.Lanczos3)
 
 	// write files
-	smallOutput, _ := os.Create("./files/photos/"+filename+"-s.jpg")
-	middleOutput, _ := os.Create("./files/photos/"+filename+"-m.jpg")
-	largeOutput, _ := os.Create("./files/photos/"+filename+"-l.jpg")
+	smallOutput, _ := os.Create("./files/photos/" + filename + "-s.jpg")
+	middleOutput, _ := os.Create("./files/photos/" + filename + "-m.jpg")
+	largeOutput, _ := os.Create("./files/photos/" + filename + "-l.jpg")
 	defer smallOutput.Close()
 	defer middleOutput.Close()
 	defer largeOutput.Close()
@@ -64,8 +64,8 @@ func uploadPhoto(context *gin.Context) {
 	jpeg.Encode(largeOutput, large, nil)
 
 	context.JSON(http.StatusOK, gin.H{
-		"small": "/photos/"+filename+"-s.jpg",
-		"middle": "/photos/"+filename+"-m.jpg",
-		"large": "/photos/"+filename+"-l.jpg",
+		"small":  "/photos/" + filename + "-s.jpg",
+		"middle": "/photos/" + filename + "-m.jpg",
+		"large":  "/photos/" + filename + "-l.jpg",
 	})
 }
