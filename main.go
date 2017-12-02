@@ -23,10 +23,12 @@ func main() {
 	router.GET("/uploader", baseHandler)
 
 	// /photos
+	router.Static("/cache", "./files/cache")
 	router.Static("/photos", "./files/photos")
 
 	// API
 	router.POST("/api/photos", uploadPhoto)
+	router.POST("/api/_fetch", fetchRemotePhoto)
 
 	router.Run(":8080")
 }
@@ -62,5 +64,23 @@ func uploadPhoto(context *gin.Context) {
 		"small":  "/photos/" + filename + "-s.jpg",
 		"middle": "/photos/" + filename + "-m.jpg",
 		"large":  "/photos/" + filename + "-l.jpg",
+	})
+}
+
+type FetchRemotePhotoForm struct {
+	URL string `json:"url" binding:"required"`
+}
+func fetchRemotePhoto(context *gin.Context) {
+	var json FetchRemotePhotoForm
+	context.BindJSON(&json)
+	response, _ := http.Get(json.URL)
+	img, _, _ := image.Decode(response.Body)
+	filename := fmt.Sprintf("%s", uuid.NewV4())
+	output, _ := os.Create("./files/cache/" + filename + ".jpg")
+	defer output.Close()
+	jpeg.Encode(output, img, nil)
+
+	context.JSON(http.StatusOK, gin.H{
+		"url": "/cache/" + filename + ".jpg",
 	})
 }

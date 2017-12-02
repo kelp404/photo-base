@@ -12,8 +12,17 @@
               :accept="'image/*'"
               :file-size-limit="0"
               :quality="2"
+              :initial-image="initialImage"
               :zoom-speed="3"></croppa>
       <div>
+        <div class="form-group">
+          <div class="input-group" style="max-width: 400px;">
+            <input v-model="url" type="text" class="form-control" placeholder="Remote photo URL">
+            <span class="input-group-btn">
+              <button @click="fetchRemotePhoto" class="btn btn-default" type="button">Fetch</button>
+            </span>
+          </div>
+        </div>
         <p v-if="result">
           Small: <a :href="result.small" target="_blank">{{ result.small }}</a><br/>
           Middle: <a :href="result.middle" target="_blank">{{ result.middle }}</a><br/>

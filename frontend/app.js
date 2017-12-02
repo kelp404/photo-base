@@ -15,11 +15,25 @@
               template: response.body,
               data: function () {
                 return {
+                  url: '',
                   croppa: {},
+                  initialImage: null,
                   result: null
                 };
               },
               methods: {
+                fetchRemotePhoto: function () {
+                  var data = {
+                    url: this.url
+                  };
+                  this.$http.post('/api/_fetch', data).then(function (response) {
+                    var image = new Image();
+                    image.setAttribute('crossorigin', 'anonymous');
+                    image.src = response.body.url;
+                    this.initialImage = image;
+                    this.croppa.refresh();
+                  });
+                },
                 uploadCroppedImage: function () {
                   var _this = this;
                   this.croppa.generateBlob(function (blob) {
